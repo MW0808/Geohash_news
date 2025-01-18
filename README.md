@@ -1,1 +1,1 @@
-# psychic-robot
+# Geohash_news
