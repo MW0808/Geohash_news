@@ -2,7 +2,7 @@ import Report from "../models/report.model.js";
 import cloudinary from "../lib/cloudinary.js";
 import { io } from "../lib/socket.js";
 import Geohash from "latlon-geohash";
-import User from "../models/user.mode.js";
+import User from "../models/user.model.js";
 
 export const getGeohash = async (req, res) => {
     const {lat, long} = req.query;
