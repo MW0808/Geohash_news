@@ -13,6 +13,7 @@ export default router;
 router.post("/post", sendReport);
 router.post("/upvote", upvote);
 router.post("/downvote", downvote);
+generateNewsletter();
 
 cron.schedule('* * * * *', async() => { // 0 19 * * * for 7pm
     generateNewsletter();

@@ -43,9 +43,25 @@ export const generateNewsletter = async () => {
         const refinedLocation =  await reportedLocations.filter(location => location.score >= 0);
         //loop through the refinedLocations and generate newsletters for them and their neighborhood (refer to getReports in reports 
         // controller for this implementation)
-
-        //in each iteration, we call the function Richard is working on to actually generate it, we get it returned here and then call the saveNewsletter 
-        //function with it
+        try {
+            console.log(reportedLocations)
+            for (let i = 0; i < refinedLocation.length; i++){
+                console.log(refinedLocation[i])
+                const {geohash} = location[i];
+                const neighborhood = Geohash.neighbours(geohash);
+                const nearbyReports = await Report.find({
+                $or: [
+                    {location: {$in: [...Object.values(neighborhood)]}},
+                    {location: geohash}
+                ]
+                // send nearby reports to Richard
+            });
+            }
+            
+            // console.log(nearbyReports);
+        } catch (error) {
+            console.log(error);
+        }
     } catch (error) {
         console.log(error);
     }
