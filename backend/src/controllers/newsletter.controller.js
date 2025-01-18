@@ -3,6 +3,23 @@ import cloudinary from "../lib/cloudinary.js";
 import mongoose from "mongoose";
 import Report from "../models/report.model.js";
 import Geohash from "latlon-geohash";
+import User from "../models/user.model.js";
+
+export const subscribeToNewsletter = async (req, res) => {
+    const {lat, long} = req.query;
+    const geohash = Geohash.encode(lat, long, 6);
+    const {auth0Id} = req.body;
+    try {
+        const user = User.findOneAndUpdate(
+            {auth0Id},
+            {$push: {subscriptions: geohash}},
+            {new: true}
+        )
+        res.status(200).json(user);
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 export const sendNewsletter = async () => {
     try {
@@ -59,7 +76,6 @@ export const generateNewsletter = async () => {
         ]);
 
         for (let i = 0; i < results.length; i++) {
-            console.log(results[i])
             const {_id: geohash} = results[i];
             const neighborhood = Geohash.neighbours(geohash);
             const nearbyReports = await Report.find({
@@ -69,6 +85,7 @@ export const generateNewsletter = async () => {
                 ]
                 // send nearby reports to Richard
             });
+            console.log(nearbyReports)
         }
 
 

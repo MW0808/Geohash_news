@@ -16,7 +16,7 @@ const newsletterSchema = new mongoose.Schema(
             required: true
         },
         images: {
-            type: [String]
+            type: [String] 
         },
         score: {
             type: Number,

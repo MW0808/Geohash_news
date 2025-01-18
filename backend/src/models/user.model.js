@@ -18,6 +18,9 @@ const userSchema = new mongoose.Schema(
         },
         lastPosted: {
             type: Date,
+        },
+        subscriptions: {
+            type: [String]
         }
     }
 );
