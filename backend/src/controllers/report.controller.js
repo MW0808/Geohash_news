@@ -2,6 +2,7 @@ import Report from "../models/report.model.js";
 import cloudinary from "../lib/cloudinary.js";
 import { io } from "../lib/socket.js";
 import Geohash from "latlon-geohash";
+import User from "../models/user.mode.js";
 
 export const getGeohash = async (req, res) => {
     const {lat, long} = req.query;
@@ -11,7 +12,7 @@ export const getGeohash = async (req, res) => {
 
 export const sendReport = async (req, res) => {
     try {
-        const {title, location, description, image} = req.body;
+        const {title, location, description, image, posterId} = req.body;
     let imageUrl;
     if (image) {
         const uploadResponse = await cloudinary.uploader.upload(image);
@@ -22,7 +23,8 @@ export const sendReport = async (req, res) => {
         title,
         location,
         description,
-        image: imageUrl
+        image: imageUrl,
+        posterId
     });
 
     await newReport.save();
@@ -42,8 +44,17 @@ export const upvote = async (req, res) => {
             {$inc:{score: 1}},
             {new: true}
         )
+
+        const {posterId: auth0Id} = updateDoc;
+
+        const updatedPerson = await User.findOneAndUpdate(
+            {auth0Id},
+            {$inc:{score: 1}},
+            {new: true}
+        )
+
     
-    res.status(200).json(updateDoc)
+    res.status(200).json(updateDoc, updatedPerson)
     } catch (error) {
         console.log(error)
     }

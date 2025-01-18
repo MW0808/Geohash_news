@@ -1,5 +1,7 @@
 import Newsletter from "../models/newsletter.model.js";
 import cloudinary from "../lib/cloudinary.js";
+import mongoose from "mongoose";
+import Report from "../models/report.model.js";
 
 export const sendNewsletter = async () => {
     try {
@@ -33,4 +35,8 @@ export const sendNewsletter = async () => {
     } catch (error) {
         console.log(error)
     }
+}
+
+export const generateNewsletter = async () => {
+    const reportedLocations = Report.distinct("location");
 }
