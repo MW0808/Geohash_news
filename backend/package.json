@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "axios": "^1.7.9",
     "cloudinary": "^2.5.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -19,6 +20,7 @@
     "jsonwebtoken": "^9.0.2",
     "latlon-geohash": "^2.0.0",
     "mongoose": "^8.9.5",
+    "node-cron": "^3.0.3",
     "socket.io": "^4.8.1"
   }
 }
