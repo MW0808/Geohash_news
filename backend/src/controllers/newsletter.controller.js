@@ -17,7 +17,7 @@ export const subscribeToNewsletter = async (req, res) => {
         )
         res.status(200).json(user);
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
