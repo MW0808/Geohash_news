@@ -54,7 +54,6 @@ export const generateNewsletter = async () => {
             $group: {
             _id: "$location",  
             totalScore: { $sum: "$score" },  
-            count: { $sum: 1 }, 
             },
         }
         ]);
