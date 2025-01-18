@@ -57,8 +57,7 @@ export const downvote = async (req, res) => {
             {$inc:{score: -1}},
             {new: true}
         )
-    
-    res.status(200).json(updateDoc)
+        res.status(200).json(updateDoc)
     } catch (error) {
         console.log(error)
     }
@@ -66,8 +65,16 @@ export const downvote = async (req, res) => {
 
 export const getReports = async (req, res) => {
     try {
-        const 
+        const {geohash} = req.params;
+        const neighborhood = Geohash.neighbours(geohash);
+        const nearbyReports = await Report.find({
+            $or: [
+                {location: {$in: [...Object.values(neighborhood)]}},
+                {location: geohash}
+            ]
+        });
+        res.status(200).json(nearbyReports);
     } catch (error) {
-        
+        console.log(error);
     }
 }
