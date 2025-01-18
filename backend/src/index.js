@@ -14,7 +14,6 @@ const PORT = process.env.PORT;
 app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 
-app.use("/api/auth", authRoutes);
 app.use("/api/reports", reportRoutes);
 
 server.listen(PORT, () => {
