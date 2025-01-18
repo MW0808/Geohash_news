@@ -9,5 +9,5 @@ router.get("/getGeohash", getGeohash);
 export default router;
 
 router.post("/post", sendReport);
-// router.post("/upvote", upvote);
+router.post("/upvote", upvote);
 // router.post("/downvote", downvote);

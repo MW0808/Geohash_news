@@ -38,6 +38,13 @@ export const sendReport = async (req, res) => {
 
 }
 
-// export const upvote
+export const upvote async (req, res) => {
+    try {
+        //_id in req.body
+        //use findoneandupdate in mongoose to find this _id and update the upvote count by + 1
+    } catch (error) {
+        
+    }
+}
 
 // export const downvote
