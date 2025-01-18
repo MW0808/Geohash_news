@@ -3,11 +3,6 @@ import cloudinary from "../lib/cloudinary.js";
 import { io } from "../lib/socket.js";
 import Geohash from "latlon-geohash";
 
-
-// export  const getReports = async (req, res) => {
-//     const {lat, long} = req.query;
-    
-// };
 export const getGeohash = async (req, res) => {
     const {lat, long} = req.query;
     const geohash = Geohash.encode(lat, long, 6);
@@ -68,3 +63,11 @@ export const downvote = async (req, res) => {
         console.log(error)
     }
 };
+
+export const getReports = async (req, res) => {
+    try {
+        const 
+    } catch (error) {
+        
+    }
+}

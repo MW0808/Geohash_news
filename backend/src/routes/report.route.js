@@ -3,7 +3,7 @@ import {sendReport, getGeohash, upvote, downvote} from "../controllers/report.co
 
 const router = express.Router();
 
-// router.get("/get", getReports);
+router.get("/getReports", getReports);
 router.get("/getGeohash", getGeohash);
 
 export default router;
