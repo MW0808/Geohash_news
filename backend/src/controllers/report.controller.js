@@ -47,14 +47,14 @@ export const upvote = async (req, res) => {
 
         const {posterId: auth0Id} = updateDoc;
 
-        const updatedPerson = await User.findOneAndUpdate(
+        const updatedUser = await User.findOneAndUpdate(
             {auth0Id},
             {$inc:{score: 1}},
             {new: true}
         )
 
     
-    res.status(200).json(updateDoc, updatedPerson)
+    res.status(200).json(updateDoc, updatedUser)
     } catch (error) {
         console.log(error)
     }
@@ -68,7 +68,14 @@ export const downvote = async (req, res) => {
             {$inc:{score: -1}},
             {new: true}
         )
-        res.status(200).json(updateDoc)
+
+        const updatedUser = await User.findOneAndUpdate(
+            {auth0Id},
+            {$inc:{score: -1}},
+            {new: true}
+        )
+
+        res.status(200).json(updateDoc, updatedUser)
     } catch (error) {
         console.log(error)
     }
