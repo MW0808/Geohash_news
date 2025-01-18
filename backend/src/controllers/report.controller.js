@@ -14,11 +14,15 @@ export const sendReport = async (req, res) => {
     try {
         const {title, location, description, image, posterId} = req.body;
     let imageUrl;
+
+    
+    
     if (image) {
         const uploadResponse = await cloudinary.uploader.upload(image);
         imageUrl = uploadResponse.secure_url;
     }
-
+    
+    
     const newReport = new Report({
         title,
         location,
@@ -26,9 +30,28 @@ export const sendReport = async (req, res) => {
         image: imageUrl,
         posterId
     });
+    
+    //streak functionality
+    const {createdAt} = await newReport.save();
+    const {lastPosted} = await User.findOne({auth0Id: posterId});
 
-    await newReport.save();
+    const postDay = new Date(createdAt).setHours(0, 0, 0);
+    const lastPost = new Date(lastPosted).setHours(0, 0, 0);
 
+    if ((postDay - lastPost) === 24 * 60 * 60 * 1000) {
+        await User.findOneAndUpdate(
+            {auth0Id: posterId},
+            {$inc: {score: 1}},
+        )
+    }
+
+    if ((postDay - lastPost) >= 24 * 60 * 60 * 1000) {
+        await User.findOneAndUpdate(
+            {auth0Id: posterId},
+            {$set: {score: 1}},
+        )
+    }
+    
     res.status(201).json(newReport);
     } catch (error) {
         console.log(error)
