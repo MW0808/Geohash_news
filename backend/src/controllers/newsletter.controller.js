@@ -38,5 +38,15 @@ export const sendNewsletter = async () => {
 }
 
 export const generateNewsletter = async () => {
-    const reportedLocations = Report.distinct("location");
+    try {
+        const reportedLocations = await Report.distinct("location");
+        const refinedLocation =  await reportedLocations.filter(location => location.score >= 0);
+        //loop through the refinedLocations and generate newsletters for them and their neighborhood (refer to getReports in reports 
+        // controller for this implementation)
+
+        //in each iteration, we call the function Richard is working on to actually generate it, we get it returned here and then call the saveNewsletter 
+        //function with it
+    } catch (error) {
+        console.log(error);
+    }
 }
