@@ -21,7 +21,7 @@ export const subscribeToNewsletter = async (req, res) => {
     }
 }
 
-export const sendNewsletter = async () => {
+export const sendNewsletter = async (newsletter) => {
     try {
         //Below is the testing data
         const title = "Daily Newsletter";
@@ -87,10 +87,6 @@ export const generateNewsletter = async () => {
             });
             console.log(nearbyReports)
         }
-
-
-        // const reportedLocations = await Report.distinct("location");
-        // const refinedLocation =  await reportedLocations.filter(location => location.score >= 0);
         //loop through the refinedLocations and generate newsletters for them and their neighborhood (refer to getReports in reports 
         // controller for this implementation)
 
