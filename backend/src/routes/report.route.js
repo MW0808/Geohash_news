@@ -1,11 +1,11 @@
 import express from "express";
-import {sendReport, getGeohash, upvote, downvote} from "../controllers/report.controller.js";
 import { sendNewsletter } from "../controllers/newsletter.controller.js";
 import cron from 'node-cron';
+import {sendReport, getReports, getGeohash, upvote, downvote} from "../controllers/report.controller.js";
 
 const router = express.Router();
 
-// router.get("/get", getReports);
+router.get("/get/:geohash", getReports);
 router.get("/getGeohash", getGeohash);
 
 export default router;
