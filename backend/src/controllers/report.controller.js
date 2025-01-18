@@ -3,11 +3,6 @@ import cloudinary from "../lib/cloudinary.js";
 import { io } from "../lib/socket.js";
 import Geohash from "latlon-geohash";
 
-
-// export  const getReports = async (req, res) => {
-//     const {lat, long} = req.query;
-    
-// };
 export const getGeohash = async (req, res) => {
     const {lat, long} = req.query;
     const geohash = Geohash.encode(lat, long, 6);
@@ -62,9 +57,24 @@ export const downvote = async (req, res) => {
             {$inc:{score: -1}},
             {new: true}
         )
-    
-    res.status(200).json(updateDoc)
+        res.status(200).json(updateDoc)
     } catch (error) {
         console.log(error)
     }
 };
+
+export const getReports = async (req, res) => {
+    try {
+        const {geohash} = req.params;
+        const neighborhood = Geohash.neighbours(geohash);
+        const nearbyReports = await Report.find({
+            $or: [
+                {location: {$in: [...Object.values(neighborhood)]}},
+                {location: geohash}
+            ]
+        });
+        res.status(200).json(nearbyReports);
+    } catch (error) {
+        console.log(error);
+    }
+}
