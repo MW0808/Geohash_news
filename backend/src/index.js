@@ -4,7 +4,6 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { app, server } from "./lib/socket.js";
 import { connectDB } from "./lib/db.js"
-import authRoutes from "./routes/auth.route.js"
 import reportRoutes from "./routes/report.route.js"
 
 

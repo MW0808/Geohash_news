@@ -1,3 +1,13 @@
 import express from "express";
-import { protectRoute } from "../middleware/auth.middleware.js";
-import { getReports, sendReport } from "../controllers/report.controller.js";
+import { sendReport, getGeohash } from "../controllers/report.controller.js";
+
+const router = express.Router();
+
+// router.get("/get", getReports);
+router.get("/getGeohash", getGeohash);
+
+export default router;
+
+router.post("/post", sendReport);
+// router.post("/upvote", upvote);
+// router.post("/downvote", downvote);
