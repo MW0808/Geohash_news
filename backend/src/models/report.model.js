@@ -14,11 +14,7 @@ const reportSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        upvote: {
-            type: Number,
-            default: 0
-        },
-        downvote: {
+        score: {
             type: Number,
             default: 0
         },

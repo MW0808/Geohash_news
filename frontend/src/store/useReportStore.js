@@ -24,7 +24,7 @@ export const useReportStore = create((set, get) => ({
     getGeohash: async (lat, long) => {
         try {
             const res = await axiosInstance.get(`/getGeoHash?lat=${lat}&long=${long}`);
-            const geoHash =
+            //const geoHash =
         } catch (error) {
             
         }

@@ -3,6 +3,7 @@ import cloudinary from "../lib/cloudinary.js";
 import { io } from "../lib/socket.js";
 import Geohash from "latlon-geohash";
 
+
 // export  const getReports = async (req, res) => {
 //     const {lat, long} = req.query;
     
@@ -36,15 +37,34 @@ export const sendReport = async (req, res) => {
         console.log(error)
     }
 
-}
+};
 
-export const upvote async (req, res) => {
+export const upvote = async (req, res) => {
     try {
-        //_id in req.body
-        //use findoneandupdate in mongoose to find this _id and update the upvote count by + 1
+        const {_id} = req.body;
+        const updateDoc = await Report.findOneAndUpdate(
+            {_id},
+            {$inc:{score: 1}},
+            {new: true}
+        )
+    
+    res.status(200).json(updateDoc)
     } catch (error) {
-        
+        console.log(error)
     }
-}
+};
 
-// export const downvote
+export const downvote = async (req, res) => {
+    try {
+        const {_id} = req.body;
+        const updateDoc = await Report.findOneAndUpdate(
+            {_id},
+            {$inc:{score: -1}},
+            {new: true}
+        )
+    
+    res.status(200).json(updateDoc)
+    } catch (error) {
+        console.log(error)
+    }
+};
