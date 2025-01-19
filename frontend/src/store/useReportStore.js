@@ -29,6 +29,14 @@ export const useReportStore = create((set, get) => ({
         }
     },
 
+    upvote: async () => {
+
+    },
+
+    downvote: async () => {
+
+    },
+
     subscribeToReports: () => {
         const socket = useAuthStore.getState().socket;
         socket.on("newReport", (newReport) => {
