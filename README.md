@@ -40,7 +40,9 @@
     - Sign in and create your [Gemini API Key](https://aistudio.google.com/welcome)
     - Create the database [MongoDB](https://www.mongodb.com/cloud)
     - Get Cloud name, API key, API secret [Cloudinary](https://cloudinary.com)
-7. Run the program on localhost5173
+6. Run the program on localhost5173
+=======
+main
 
 ---
 
