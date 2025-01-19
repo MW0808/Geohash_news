@@ -28,7 +28,7 @@ const App = () => {
           <Route path="/newsletter" element={<NewsletterPage />} />
          
           <Route path="/signup" element={!authenticatedUser ? <SignupPage /> : <Navigate to="/" />} />
-          <Route path="/profile" element={authenticatedUser ? <ProfilePage /> : <Navigate to="/login" />} />
+          <Route path="/profile" element={authenticatedUser ? <ProfilePage /> : <Navigate to="/" />} />
         </Routes>
       </div>
       
