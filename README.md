@@ -17,22 +17,9 @@
 ---
 
 ## Features of the software
-- **Multiple difficulty levels:** The program offers 3 difficulty levels - Easy, Medium, Hard. This allows user to
-  choose a challenge suited to their skills and experience. You can select the difficulty level using the dropdown menu as
-  shown below, or choose Randomizer3000 if you want a random difficulty level.
-
-<img src="images_used_for_readme/choose_engine.png" alt="choose engine" width="250"/>
-
-- **Cancel game button:**
-  The player can choose to cancel and restart the game at any time.
-
-
-- **View Leaderboard:** The leaderboard is beside the game panel and is constantly being updated, allowing the player to
-  see how they are doing compared to the rest of the players.
-
-
-- **Send message to the user:** If the user chooses to receive SMS messages, they will receive an SMS message after every
-  game they play describing their current rank on the leaderboard.
+- Ananonymously read & share community news in real time: Users will only be able to see/post news in the area they are currently located in. 
+- Receive/give upvote & downvote for posts
+- Subscribe to receive daily news digests from areas of your choice
 
 ## Installation Instructions
 
@@ -88,8 +75,8 @@ To utilize SMS notifications, follow these steps:
 ---
 
 ## Contributors
-- **Kunal Rishi**:
-- **Anthony Kim**:
+- **Kunal Rishi**: [GitHub](https://github.com/plumedeneko)
+- **Anthony Kim**: [GitHub](https://github.com/antmskim)
 - **Richard Lin**: [GitHub](https://github.com/richardrLin)
 - **Mina Wu**: [GitHub](https://github.com/MW0808)
 
