@@ -26,6 +26,8 @@
 - Subscribe to receive daily news digests from areas of your choice
 - Digest includes the most popular or important news from the community summarized through our trained model
 
+---
+
 ## Installation Instructions
 1. Open the program in an IDE of your choice
 2. Run npm install on both frontend and backend
