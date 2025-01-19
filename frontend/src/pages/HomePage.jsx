@@ -1,9 +1,7 @@
 import Report from '../components/Report'
 import Bottombar from '../components/Bottombar'
-// import { useAuth0 } from '@auth0/auth0-react'
 
 const HomePage = () => {
-  // const { loginWithRedirect } = useAuth0();
   const reports = [1, 2, 3]; 
   
   return (

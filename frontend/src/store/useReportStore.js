@@ -1,32 +1,47 @@
 import {create} from "zustand";
 import {axiosInstance} from "../lib/axios.js"
-import { io } from "socket.io-client";
-import { disconnect } from "mongoose";
-
-const BASE_URL = "http://localhost:5001"
+import { useAuthStore } from "./useAuthStore.js";
 
 export const useReportStore = create((set, get) => ({
-    socket: null,
+    geohash: null,
     reports: [],
-    isGettingReports: false,
-    isUpdatingReport: false,
+    loadingReports: false,
 
-    connectSocket: () => {
-        const socket = io(BASE_URL);
-        socket.connect();
-        set({socket: socket});
-    },
-
-    disconnectSocket: () => {
-        if (get().socket?.connected) get().socket.disconnect();
-    },
-
-    getGeohash: async (lat, long) => {
+    getGeoHash: async (lat, long) => {
         try {
-            const res = await axiosInstance.get(`/getGeoHash?lat=${lat}&long=${long}`);
-            //const geoHash =
+            const res = await axiosInstance.get(`/getGeohash?lat=${lat},long=${long}`)
+            set({geohash: res.data})
         } catch (error) {
-            
+            console.log(error)
         }
-    }
+    },
+
+    getReports: async () => {
+        set({loadingReports: true})
+        try {
+            const geohash = useReportStore.getState().geohash;
+            const res = await axiosInstance.get(`/get/${geohash}`)
+            set({reports: res.data})
+        } catch (error) {
+            console.log(error)
+        } finally {
+            set({loadingReports: false})
+        }
+    },
+
+    subscribeToReports: () => {
+        const socket = useAuthStore.getState().socket;
+        socket.on("newReport", (newReport) => {
+            set({reports: [...get().reports, newReport]});
+        })
+    },
+
+    subscribeToVotes: () => {
+        const socket = useAuthStore.getState().socket;
+        socket.on("scoreUpdate", (updatedReport) => {
+            set({reports: [...get().reports.filter(report => report._id != updatedReport._id), newReport]});
+        })
+    },
+
+    
 }))

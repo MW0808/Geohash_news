@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const [timeLeft, setTimeLeft] = useState({ hours: 10, minutes: 24, seconds: 59 }); // Initial values
   const navigate = useNavigate();
-
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
@@ -109,7 +108,7 @@ const Navbar = () => {
 
             
             <li>
-              <a>Logout</a>
+            <a onClick={() => navigate("/login")}>Log in</a> {/* Navigate to login */}
             </li>
           </ul>
         </div>
