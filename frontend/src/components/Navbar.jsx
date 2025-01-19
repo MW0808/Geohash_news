@@ -5,7 +5,7 @@ import toast from "react-hot-toast"
 
 const Navbar = () => {
   const {authenticatedUser, logout} = useAuthStore();
-  const [timeLeft, setTimeLeft] = useState({ hours: 10, minutes: 24, seconds: 59 }); // Initial values
+  const [timeLeft, setTimeLeft] = useState({ hours: 10, minutes: 24, seconds: 59 }); 
   const navigate = useNavigate();
   useEffect(() => {
     const timer = setInterval(() => {
@@ -27,12 +27,11 @@ const Navbar = () => {
       });
     }, 1000);
 
-    return () => clearInterval(timer); // Cleanup interval on unmount
+    return () => clearInterval(timer); 
   }, []);
 
   return (
     <div className="navbar bg-base-100">
-      {/* Left: Dropdown Menu and Countdown */}
       <div className="navbar-start flex items-center space-x-4">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -64,7 +63,6 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* Countdown Timer */}
         <span className="countdown font-mono text-2xl">
           <span style={{ "--value": timeLeft.hours }}></span>:
           <span style={{ "--value": timeLeft.minutes }}></span>:
@@ -72,7 +70,6 @@ const Navbar = () => {
         </span>
       </div>
 
-      {/* Center: Title */}
       <div className="navbar-center">
          <a 
       className="btn btn-ghost text-xl"
@@ -84,14 +81,13 @@ const Navbar = () => {
         
       </div>
 
-      {/* Right: Profile Photo */}
       <div className="navbar-end">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
               <img
                 alt="Profile"
-                src="userprofile.jpg" // Ensure the file is in the public folder
+                src="userprofile.jpg" 
               />
             </div>
           </div>
@@ -109,9 +105,8 @@ const Navbar = () => {
             </a>
           </li>
 
-            
             <li>
-            <a onClick={authenticatedUser ? (logout) => toast.success("Logged out!") : () => navigate("/login")}>{authenticatedUser ? "Logout" : "Login"}</a> {/* Navigate to login */}
+            <a onClick={authenticatedUser ? (logout) => toast.success("Logged out!") : () => navigate("/login")}>{authenticatedUser ? "Logout" : "Login"}</a> 
             </li>
           </ul>
         </div>

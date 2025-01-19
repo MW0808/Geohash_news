@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { text } from "express"; 
 
-const genAI = new GoogleGenerativeAI("AIzaSyDj_182s0bXcpxnaCChH4Uek8vbmoGGtJY");
+const genAI = new GoogleGenerativeAI("API_KEY_GOES_HERE");
 
 async function genNewsLetter(reports) {
 

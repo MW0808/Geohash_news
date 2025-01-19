@@ -11,12 +11,10 @@ const ProfilePage = () => {
           />
         </figure>
         <div className="card-body">
-          {/* Centered Username */}
           <h2 className="card-title text-center w-full flex justify-center items-center">
             UserName
           </h2>
 
-          {/* Resized Stats */}
           <div className="card-actions justify-center">
             <div className="stats shadow flex flex-wrap justify-center gap-2">
               <div className="stat w-28 p-2">

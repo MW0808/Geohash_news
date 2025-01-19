@@ -7,20 +7,19 @@ const containerStyle = {
 };
 
 const initialCenter = {
-  lat: 37.7749, // Example Latitude (San Francisco)
-  lng: -122.4194, // Example Longitude (San Francisco)
+  lat: 37.7749, 
+  lng: -122.4194, 
 };
 
 const MapComponent = () => {
-  const [selected, setSelected] = useState(null); // Track selected coordinates
+  const [selected, setSelected] = useState(null); 
 
-  // Handle map clicks
   const handleMapClick = (event) => {
     const lat = event.latLng.lat();
     const lng = event.latLng.lng();
-    const coordinates = { lat, lng }; // Prepare coordinates object
-    console.log(`Selected Coordinates:`, coordinates); // Log coordinates for debugging
-    setSelected(coordinates); // Update state with selected coordinates
+    const coordinates = { lat, lng }; 
+    console.log(`Selected Coordinates:`, coordinates); 
+    setSelected(coordinates); 
   };
 
   return (
@@ -28,17 +27,15 @@ const MapComponent = () => {
       mapContainerStyle={containerStyle}
       center={initialCenter}
       zoom={10}
-      onClick={handleMapClick} // Trigger on map click
+      onClick={handleMapClick} 
     >
-      {/* Marker for the selected position */}
       {selected && (
         <>
           <Marker position={selected} />
 
-          {/* InfoWindow to Display Coordinates */}
           <InfoWindow
             position={selected}
-            onCloseClick={() => setSelected(null)} // Allow closing InfoWindow
+            onCloseClick={() => setSelected(null)} 
           >
             <div>
               <h4>Coordinates</h4>

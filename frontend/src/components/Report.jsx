@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 
 const Report = () => {
-  const [votes, setVotes] = useState(123); // Initial upvotes
+  const [votes, setVotes] = useState(123); 
   const [upvoted, setUpvoted] = useState(false);
   const [downvoted, setDownvoted] = useState(false);
 
-  // Handle Upvote
   const handleUpvote = () => {
     if (!upvoted) {
       setVotes(downvoted ? votes + 2 : votes + 1);
@@ -17,7 +16,6 @@ const Report = () => {
     }
   };
 
-  // Handle Downvote
   const handleDownvote = () => {
     if (!downvoted) {
       setVotes(upvoted ? votes - 2 : votes - 1);
@@ -31,7 +29,6 @@ const Report = () => {
 
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl flex">
-      {/* Upvote and Downvote Arrows */}
       <div className="flex flex-col items-center justify-center p-4">
         <button
           className={`text-lg ${upvoted ? 'text-green-500' : 'text-gray-600'} hover:text-green-500`}
@@ -48,7 +45,7 @@ const Report = () => {
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
           </svg>
         </button>
-        <span className="text-xs font-bold my-2">{votes}</span> {/* Upvote count */}
+        <span className="text-xs font-bold my-2">{votes}</span> {}
         <button
           className={`text-lg ${downvoted ? 'text-red-500' : 'text-gray-600'} hover:text-red-500`}
           onClick={handleDownvote}
@@ -66,9 +63,7 @@ const Report = () => {
         </button>
       </div>
 
-      {/* Report Content */}
       <div className="flex flex-col lg:flex-row items-center lg:items-start">
-        {/* Photo Preview */}
         <figure className="p-4">
           <img
             src="preview.png"
@@ -77,7 +72,6 @@ const Report = () => {
           />
         </figure>
 
-        {/* Text Content */}
         <div className="card-body">
           <h2 className="card-title">Title</h2>
           <p>

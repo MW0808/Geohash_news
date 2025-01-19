@@ -5,7 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import ProfilePage from "./pages/ProfilePage";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { LoadScript } from "@react-google-maps/api"; // Import LoadScript
+import { LoadScript } from "@react-google-maps/api"; 
 import { Toaster } from "react-hot-toast"
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
