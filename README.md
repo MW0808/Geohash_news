@@ -17,9 +17,14 @@
 ---
 
 ## Features of the software
-- Anonymously read & share community news in real time: Users will only be able to see/post news in the area they are currently located in. 
+1. User-Generated News Report
+- Anonymously read & share community news in real time: Users will only be able to see/post news in the area they are currently located in.
+2. User engagement & Interaction
 - Receive/give upvote & downvote for posts
+- Maintain streaks by posting everyday
+3. News Digest Generation
 - Subscribe to receive daily news digests from areas of your choice
+- Digest includes the most popular or important news from the community summarized through our trained model
 
 ## Installation Instructions
 
