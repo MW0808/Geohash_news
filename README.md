@@ -32,11 +32,12 @@
 ## Installation Instructions
 1. Open the program in an IDE of your choice
 2. Run npm install on both frontend and backend
-3. Sign in and create your [API Key](https://aistudio.google.com/welcome)
-4. Create a .env file and store it in the backend folder
-5. Fill in the required information using the following naming conventions: <img src="![IMG_1037]" alt=".env file template" width="200">
-
-6. Run the program on localhost5173
+3. Create a .env file and store it in the backend folder
+4. Fill in the required information using the following naming conventions: <img src="![IMG_1037]" alt=".env file template" width="200">
+    - Sign in and create your [API Key](https://aistudio.google.com/welcome)
+    - Create the database [MongoDB](https://www.mongodb.com/cloud)
+    - Get Cloud name, API key, API secret [Cloudinary](https://cloudinary.com)
+5. Run the program on localhost5173
 
 ---
 
