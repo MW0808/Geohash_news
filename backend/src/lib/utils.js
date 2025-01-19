@@ -3,7 +3,7 @@ import { text } from "express";
 
 const genAI = new GoogleGenerativeAI("AIzaSyDj_182s0bXcpxnaCChH4Uek8vbmoGGtJY");
 
-async function genNewsLetter(reports) {
+export async function genNewsLetter(reports) {
 
 
     const generationConfig = {
@@ -35,8 +35,5 @@ async function genNewsLetter(reports) {
 
     const result = await model.generateContent(prompt);
     const response = result.response.text(); 
-
-    console.log(response);
+    return response;
 }
-
-genNewsLetter()
