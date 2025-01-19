@@ -6,21 +6,21 @@ const BASE_URL = "http://localhost:5001"
 
 export const useAuthStore = create((set, get) => ({
     authenticatedUser: null,
-    signingIn: false,
+    signingUp: false,
     loggingIn: false,
     checkingAuthentication: true,
     socket: null,
 
     checkAuthentication: async () => {
         try {
-            const result = axiosInstance.get("/auth/check");
+            const res = await axiosInstance.get("/auth/check");
             set({authenticatedUser: res.data})
             get().connectSocket();
         } catch (error) {
-            console.log(error)
+            console.log(error.response)
             set({authenticatedUser: null})
         } finally {
-            set({checkAuthentication: false});
+            set({checkingAuthentication: false});
         }
     },
 
@@ -33,13 +33,14 @@ export const useAuthStore = create((set, get) => ({
         } catch (error) {
             console.log(error)
         } finally {
-            set({signingIn: false})
+            set({signingUp: false})
         }
     },
 
     login: async (data) => {
         set({loggingIn: true})
         try {
+            console.log("Hi")
             const res = await axiosInstance.post("/auth/login", data);
             set({authenticatedUser: res.data});
             get().connectSocket()

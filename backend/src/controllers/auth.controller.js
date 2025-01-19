@@ -4,9 +4,9 @@ import bcrypt from "bcryptjs";
 import cloudinary from "../lib/cloudinary.js"
 
 export const signup = async (req, res) => {
-    const {fullName, email, password} = req.body;
+    const {username, email, password} = req.body;
     try {
-        if (!fullName || !email || !password) {
+        if (!username || !email || !password) {
             return res.status(400).json({message: "All fields are required"});
         }
 
@@ -24,7 +24,7 @@ export const signup = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         const newUser = new User({
-            fullName,
+            username,
             email,
             password: hashedPassword
         });
@@ -35,9 +35,8 @@ export const signup = async (req, res) => {
         
             res.status(201).json({
                 _id: newUser._id,
-                fullName: newUser.fullName,
+                username: newUser.username,
                 email: newUser.email,
-                profilePic: newUser.profilePic,
             });
         } else {
             res.status(400).json({message: "Invalid user data"});
@@ -64,9 +63,8 @@ export const login = async (req, res) => {
         generateToken(user._id, res);
         res.status(200).json({
             _id:user._id,
-            fullName:user.fullName,
+            username:user.username,
             email:user.email,
-            profilePic:user.profilePic,
         });
     } catch (error) {
         console.log("Error in login controller:", error.message);

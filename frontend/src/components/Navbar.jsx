@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/useAuthStore";
+import toast from "react-hot-toast"
 
 const Navbar = () => {
+  const {authenticatedUser, logout} = useAuthStore();
   const [timeLeft, setTimeLeft] = useState({ hours: 10, minutes: 24, seconds: 59 }); // Initial values
   const navigate = useNavigate();
   useEffect(() => {
@@ -108,7 +111,7 @@ const Navbar = () => {
 
             
             <li>
-            <a onClick={() => navigate("/login")}>Log in</a> {/* Navigate to login */}
+            <a onClick={authenticatedUser ? (logout) => toast.success("Logged out!") : () => navigate("/login")}>{authenticatedUser ? "Logout" : "Login"}</a> {/* Navigate to login */}
             </li>
           </ul>
         </div>

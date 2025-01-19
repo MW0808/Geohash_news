@@ -22,7 +22,6 @@ export const protectRoute = async (req, res, next) => {
         }
 
         req.user = user;
-
         next();
 
     } catch (error) {
