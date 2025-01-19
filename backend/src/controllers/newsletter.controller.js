@@ -85,7 +85,6 @@ export const generateNewsletter = async () => {
                 ]
                 // send nearby reports to Richard
             });
-            console.log(nearbyReports)
         }
         //loop through the refinedLocations and generate newsletters for them and their neighborhood (refer to getReports in reports 
         // controller for this implementation)
