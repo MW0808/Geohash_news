@@ -6,7 +6,7 @@ dotenv.config();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-async function genNewsLetter(reports) {
+export async function genNewsLetter(reports) {
 
 
     const generationConfig = {
@@ -38,8 +38,5 @@ async function genNewsLetter(reports) {
 
     const result = await model.generateContent(prompt);
     const response = result.response.text(); 
-
-    console.log(response);
+    return response;
 }
-
-genNewsLetter()

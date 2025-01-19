@@ -5,7 +5,7 @@ import Geohash from "latlon-geohash";
 import User from "../models/user.model.js";
 
 export const getGeohash = async (req, res) => {
-    const {lat, long} = req.query;
+    const {lat, long} = req.body;
     const geohash = Geohash.encode(lat, long, 6);
     res.status(200).json(geohash);
 };
@@ -85,7 +85,7 @@ export const upvote = async (req, res) => {
         )
 
     
-    res.status(200).json(updateDoc, updatedUser)
+    res.status(200).json(updateDoc)
     } catch (error) {
         console.log(error)
         res.status(400).json("Internal server error")
@@ -124,10 +124,7 @@ export const getReports = async (req, res) => {
         const {geohash} = req.params;
         const neighborhood = Geohash.neighbours(geohash);
         const nearbyReports = await Report.find({
-            $or: [
-                {location: {$in: [...Object.values(neighborhood)]}},
-                {location: geohash}
-            ]
+            location: {$in: [...Object.values(neighborhood), geohash]}
         });
         res.status(200).json(nearbyReports);
     } catch (error) {

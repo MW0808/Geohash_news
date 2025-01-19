@@ -1,9 +1,9 @@
 import Newsletter from "../models/newsletter.model.js";
 import cloudinary from "../lib/cloudinary.js";
-import mongoose from "mongoose";
 import Report from "../models/report.model.js";
 import Geohash from "latlon-geohash";
 import User from "../models/user.model.js";
+import { genNewsLetter } from "../lib/utils.js";
 
 export const subscribeToNewsletter = async (req, res) => {
     const {lat, long} = req.query;
@@ -21,31 +21,36 @@ export const subscribeToNewsletter = async (req, res) => {
     }
 }
 
-export const sendNewsletter = async (newsletter) => {
+export const sendNewsletter = async (newsletterContent, locationHash, imagesArr) => {
     try {
-        //Below is the testing data
-        const title = "Daily Newsletter";
-        const content = "Here’s the content of the newsletter.";
-        const images = [];  // Replace with actual image paths
-        const score = 90;
+        const today = new Date();
+        const month = today.getMonth() + 1;
+        const day = today.getDate();
 
-        let imageUrls = [];
-            if (images) {
-                for(let image of images){
-                    try{
-                        const uploadResponse = await cloudinary.uploader.upload(image);
-                        imageUrls.push(uploadResponse.secure_url);
-                    }
-                    catch(error){
-                        console.log(error)
-                    }
-                }  
-            }
+        const title = `Daily Digests (${month}.${day})`
+        const content = newsletterContent;
+        const images = imagesArr;
+        const score = 0;
+        const location = locationHash;
+
+        // let imageUrls = [];
+        //     if (images) {
+        //         for(let image of images){
+        //             try{
+        //                 const uploadResponse = await cloudinary.uploader.upload(image);
+        //                 imageUrls.push(uploadResponse.secure_url);
+        //             }
+        //             catch(error){
+        //                 console.log(error)
+        //             }
+        //         }  
+        //     }
 
         const newLetter = new Newsletter({
                 title,
                 content, 
-                images: imageUrls,
+                images,
+                location,
                 score
             });
         
@@ -83,11 +88,11 @@ export const generateNewsletter = async () => {
                     {location: {$in: [...Object.values(neighborhood)]}},
                     {location: geohash}
                 ]
-                // send nearby reports to Richard
             });
+            const result = await genNewsLetter(nearbyReports);
+            const imageArray = nearbyReports.map(nearbyReports => nearbyReports.image);
+            sendNewsletter(result, results[i]._id, imageArray);
         }
-        //loop through the refinedLocations and generate newsletters for them and their neighborhood (refer to getReports in reports 
-        // controller for this implementation)
 
     } catch (error) {
         console.log(error);
