@@ -3,7 +3,7 @@
 
 
 ## Table of Contents
-- [Purpose](#project-overview)
+- [Project Overview](#project-overview)
 - [Features of the software](#features-of-the-software)
 - [Installation Instructions](#installation-instructions)
 - [Usage Guide](#usage-guide)
@@ -22,14 +22,17 @@
 **2. User engagement & Interaction**
 - Receive/give upvote & downvote for posts
 - Maintain streaks by posting everyday
+- Be able to see a global history of total likes across all posts on user profile
 **3. News Digest Generation**
 - Subscribe to receive daily news digests from areas of your choice
-- Digest includes the most popular or important news from the community summarized through our trained model
+- Digest includes the most popular or important news from the community summarized through our trained AI model
 
 ## Installation Instructions
 1. Open the program in an IDE of your choice
 2. Run npm install on both frontend and backend
-3. Run the program on localhost5173
+3. Sign in and create your [API Key](https://aistudio.google.com/welcome)
+4. Create a .env file and store it in the backend folder
+5. Run the program on localhost5173
 
 ---
 
