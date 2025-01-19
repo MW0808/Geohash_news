@@ -1,27 +1,25 @@
 import {create} from "zustand";
 import {axiosInstance} from "../lib/axios.js"
 import { useAuthStore } from "./useAuthStore.js";
+import Geohash from "latlon-geohash";
 
 export const useReportStore = create((set, get) => ({
-    geohash: null,
+    geohash: "",
     reports: [],
     loadingReports: false,
+    submittingReport: false,
 
-    getGeoHash: async (lat, long) => {
-        try {
-            const res = await axiosInstance.post("/reports/getGeohash", {lat: lat, long: long})
-            set({geohash: res.data})
-        } catch (error) {
-            console.log(error)
-        }
+    getGeoHash: (lat, long) => {
+        const geohash = Geohash.encode(lat, long, 6);
+        set({geohash: geohash})
     },
 
     getReports: async () => {
-        console.log(get().geohash)
         set({loadingReports: true})
         try {
-            const geohash = get().geohash;
+            const {geohash} = get();
             const res = await axiosInstance.get(`/reports/get/${geohash}`)
+            console.log(res.data)
             set({reports: res.data})
         } catch (error) {
             console.log(error)
@@ -32,7 +30,7 @@ export const useReportStore = create((set, get) => ({
 
     upvote: async (_id) => {
         try {
-            const res = await axiosInstance.post("/reports/upvote")
+            const res = await axiosInstance.post("/reports/upvote", {_id})
             set({reports: [...get().reports.filter((report) => (report._id != _id)), res.data]})
         } catch (error) {
             console.log(error)
@@ -41,7 +39,7 @@ export const useReportStore = create((set, get) => ({
 
     downvote: async (_id) => {
         try {
-            const res = await axiosInstance.post("/reports/downvote")
+            const res = await axiosInstance.post("/reports/downvote", {_id})
             set({reports: [...get().reports.filter((report) => (report._id != _id)), res.data]})
         } catch (error) {
             console.log(error)
@@ -49,18 +47,24 @@ export const useReportStore = create((set, get) => ({
     },
 
     subscribeToReports: () => {
+        const {reports} = get();
+        if (!reports) return;
         const socket = useAuthStore.getState().socket;
         socket.on("newReport", (newReport) => {
             set({reports: [...get().reports, newReport]});
         })
     },
 
-    subscribeToVotes: () => {
-        const socket = useAuthStore.getState().socket;
-        socket.on("scoreUpdate", (updatedReport) => {
-            set({reports: [...get().reports.filter(report => report._id != updatedReport._id), newReport]});
-        })
-    },
+    submitReport: async (data) => {
+        console.log(data)
+        const posterId = useAuthStore.getState().authenticatedUser._id;
+        const {geohash} = get();
+        try {
+            await axiosInstance.post("/reports/post", {...data, location: geohash, posterId});
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     
 }))

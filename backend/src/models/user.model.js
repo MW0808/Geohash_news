@@ -28,7 +28,8 @@ const userSchema = new mongoose.Schema(
         subscriptions: {
             type: [String]
         }
-    }
+    },
+    {timestamps: true}
 );
 
 const User = mongoose.model("User", userSchema);

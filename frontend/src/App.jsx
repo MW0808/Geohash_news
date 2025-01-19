@@ -12,10 +12,11 @@ import { useEffect } from "react";
 
 const App = () => {
 
-  const {authenticatedUser, checkAuthentication} = useAuthStore();
+  const {authenticatedUser, checkAuthentication, connectSocket} = useAuthStore();
   useEffect(() => {
     checkAuthentication();
-  }, [checkAuthentication]);
+    connectSocket();
+  }, [checkAuthentication, connectSocket]);
 
   return (
     <LoadScript googleMapsApiKey={import.meta.env.VITE_GMAPS_API_KEY}>
@@ -27,7 +28,7 @@ const App = () => {
           <Route path="/newsletter" element={<NewsletterPage />} />
          
           <Route path="/signup" element={!authenticatedUser ? <SignupPage /> : <Navigate to="/" />} />
-          <Route path="/profile" element={!authenticatedUser ? <ProfilePage /> : <Navigate to="/login" />} />
+          <Route path="/profile" element={authenticatedUser ? <ProfilePage /> : <Navigate to="/login" />} />
         </Routes>
       </div>
       

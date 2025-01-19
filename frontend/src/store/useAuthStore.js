@@ -17,8 +17,9 @@ export const useAuthStore = create((set, get) => ({
             set({authenticatedUser: res.data})
             get().connectSocket();
         } catch (error) {
-            console.log(error.response)
+            console.log(error)
             set({authenticatedUser: null})
+            get().connectSocket();
         } finally {
             set({checkingAuthentication: false});
         }
@@ -53,6 +54,7 @@ export const useAuthStore = create((set, get) => ({
 
     logout: async () => {
         try {
+            console.log("Hello")
             await axiosInstance.post("/auth/logout")
             set({authenticatedUser: null})
             get().disconnectSocket()
@@ -62,15 +64,18 @@ export const useAuthStore = create((set, get) => ({
     },
 
     connectSocket: () => {
-        const {authenticatedUser} = get()
-        if (!authenticatedUser || get().socket?.connected) return;
-
+        const { authenticatedUser } = get();
+        const existingSocket = get().socket;
+    
+        if (existingSocket?.connected) return;
+    
         const socket = io(BASE_URL, {
-            query: {
-                userId: authenticatedUser._id
-            }
+            query: authenticatedUser
+                ? { userId: authenticatedUser._id }
+                : {}, 
         })
-        socket.connect()
+
+        socket.connect();
         set({socket: socket})
     },
 

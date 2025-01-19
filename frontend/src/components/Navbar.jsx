@@ -106,7 +106,14 @@ const Navbar = () => {
           </li>
 
             <li>
-            <a onClick={authenticatedUser ? (logout) => toast.success("Logged out!") : () => navigate("/login")}>{authenticatedUser ? "Logout" : "Login"}</a> 
+            <a onClick={() => {
+              if (authenticatedUser) {
+                logout();
+                toast.success("Logged out!");
+              } else {
+                navigate("/login")
+              }}
+              }>{authenticatedUser ? "Logout" : "Login"}</a> 
             </li>
           </ul>
         </div>

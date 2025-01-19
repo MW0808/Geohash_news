@@ -1,29 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useReportStore } from '../store/useReportStore';
+import { useAuthStore } from '../store/useAuthStore';
 
-const Report = () => {
-  const [votes, setVotes] = useState(123); 
+const Report = (props) => {
+  const [votes, setVotes] = useState(props.score); 
   const [upvoted, setUpvoted] = useState(false);
   const [downvoted, setDownvoted] = useState(false);
+  const {upvote, downvote} = useReportStore();
+  const {authenticatedUser} = useAuthStore();
 
-  const handleUpvote = () => {
+  const handleUpvote = async () => {
+    if (!authenticatedUser) return;
     if (!upvoted) {
       setVotes(downvoted ? votes + 2 : votes + 1);
       setUpvoted(true);
       setDownvoted(false);
+      upvote(props._id)
     } else {
       setVotes(votes - 1);
       setUpvoted(false);
+      downvote(props._id)
     }
   };
 
-  const handleDownvote = () => {
+  const handleDownvote = async () => {
+    if (!authenticatedUser) return;
     if (!downvoted) {
       setVotes(upvoted ? votes - 2 : votes - 1);
       setDownvoted(true);
       setUpvoted(false);
+      downvote(props._id)
     } else {
       setVotes(votes + 1);
       setDownvoted(false);
+      upvote(props._id);
     }
   };
 
@@ -66,18 +76,16 @@ const Report = () => {
       <div className="flex flex-col lg:flex-row items-center lg:items-start">
         <figure className="p-4">
           <img
-            src="preview.png"
+            src={props.image || "preview.png"}
             alt="Preview"
             className="rounded-lg w-40 h-40 object-cover"
           />
         </figure>
 
         <div className="card-body">
-          <h2 className="card-title">Title</h2>
+          <h2 className="card-title">{props.title}</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni corrupti nihil tenetur
-            non laboriosam porro autem eligendi, veritatis dolores sit, obcaecati doloribus ipsam
-            ratione qui possimus vitae nulla sed nam!
+            {props.description}
           </p>
         </div>
       </div>
