@@ -11,19 +11,8 @@
 
 ---
 
-## Purpose
-The purpose of this project is to modernize the classic Mancala game by integrating engaging features, such as:
-- AI opponents with adjustable difficulty levels.
-- A dynamic leaderboard for players to track and compare scores.
-- SMS notifications to keep players updated on their leaderboard position and gameplay activity.
-
-Additionally, this project was designed with the following objectives:
-1. **User Experience**:
-    - Provide a fun and intuitive gaming experience for Mancala fans.
-    - Create a competitive environment through a real-time leaderboard.
-2. **Educational Goals**:
-    - Demonstrate clean architecture principles (e.g., separation of concerns, SOLID design).
-    - Gain hands-on experience with third-party API integration.
+## Project Overview
+- This project aims to create a dynamic community-based newsletter platform that allows users to share and explore events happening around them in real time. By leveraging user-generated posts, modern data storage solutions, and generative AI, the platform curates the most relevant and engaging content into a daily newsletter. The newsletter provides concise summaries of the day's top events, enhancing community awareness and interaction.
 
 ---
 
