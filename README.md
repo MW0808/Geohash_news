@@ -43,10 +43,9 @@
     - Sign up and authorize for an account
 
 3. **Begin Using the Program!**
-    - Posting
+    - Posting *Posting are only allowed after 7 days of registration
     - Upvoting/downvoting
     - Subscribe to daily digests in any area
-    *Posting are only allowed after 7 days of registration
 
 ---
 
