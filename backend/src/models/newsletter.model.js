@@ -11,8 +11,12 @@ const newsletterSchema = new mongoose.Schema(
             type: String,
             required: true
         },
+        location: {
+            type: String,
+            required: true
+        },
         images: {
-            type: [String]
+            type: [String] 
         },
         score: {
             type: Number,

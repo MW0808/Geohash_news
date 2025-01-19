@@ -21,6 +21,10 @@ const reportSchema = new mongoose.Schema(
         image: {
             type: String,
             default: ""
+        },
+        posterId: {
+            type: String,
+            required: true
         }
     },
     {timestamps: true}

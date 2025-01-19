@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/useAuthStore";
+import toast from "react-hot-toast"
 
 const Navbar = () => {
+  const {authenticatedUser, logout} = useAuthStore();
   const [timeLeft, setTimeLeft] = useState({ hours: 10, minutes: 24, seconds: 59 }); // Initial values
   const navigate = useNavigate();
-
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
@@ -72,7 +74,14 @@ const Navbar = () => {
 
       {/* Center: Title */}
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">What's New</a>
+         <a 
+      className="btn btn-ghost text-xl"
+      onClick={() => navigate("/")} 
+      role="button" 
+    >
+      What's New
+    </a>
+        
       </div>
 
       {/* Right: Profile Photo */}
@@ -91,16 +100,18 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
+            <a
+              onClick={() => navigate("/profile")}
+              className="justify-between flex items-center"
+            >
+              Profile
+              <span className="badge">Me</span>
+            </a>
+          </li>
+
+            
             <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
+            <a onClick={authenticatedUser ? (logout) => toast.success("Logged out!") : () => navigate("/login")}>{authenticatedUser ? "Logout" : "Login"}</a> {/* Navigate to login */}
             </li>
           </ul>
         </div>
