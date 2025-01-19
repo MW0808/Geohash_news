@@ -1,30 +1,37 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
-import toast from "react-hot-toast"
+import toast from "react-hot-toast";
 
 const Navbar = () => {
-  const {authenticatedUser, logout} = useAuthStore();
-  const [timeLeft, setTimeLeft] = useState({ hours: 10, minutes: 24, seconds: 59 }); 
+  const { authenticatedUser, logout } = useAuthStore();
+  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 }); 
   const navigate = useNavigate();
+
   useEffect(() => {
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const target = new Date();
+
+      // Set the target time to 7 PM
+      target.setHours(19, 0, 0, 0);
+
+      // If the current time is past 7 PM, set the target to 7 PM tomorrow
+      if (now > target) {
+        target.setDate(target.getDate() + 1);
+      }
+
+      const difference = target - now;
+
+      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((difference / (1000 * 60)) % 60);
+      const seconds = Math.floor((difference / 1000) % 60);
+
+      return { hours, minutes, seconds };
+    };
+
     const timer = setInterval(() => {
-      setTimeLeft((prevTime) => {
-        let { hours, minutes, seconds } = prevTime;
-
-        if (seconds > 0) {
-          seconds--;
-        } else if (minutes > 0) {
-          minutes--;
-          seconds = 59;
-        } else if (hours > 0) {
-          hours--;
-          minutes = 59;
-          seconds = 59;
-        }
-
-        return { hours, minutes, seconds };
-      });
+      setTimeLeft(calculateTimeLeft());
     }, 1000);
 
     return () => clearInterval(timer); 
@@ -55,7 +62,7 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-            <a onClick={() => navigate("/")}>HomePage</a>
+              <a onClick={() => navigate("/")}>HomePage</a>
             </li>
             <li>
               <a onClick={() => navigate("/newsletter")}>Newsletter</a>
@@ -71,24 +78,20 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-center">
-         <a 
-      className="btn btn-ghost text-xl"
-      onClick={() => navigate("/")} 
-      role="button" 
-    >
-      What's New
-    </a>
-        
+        <a
+          className="btn btn-ghost text-xl"
+          onClick={() => navigate("/")}
+          role="button"
+        >
+          What's New
+        </a>
       </div>
 
       <div className="navbar-end">
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img
-                alt="Profile"
-                src="userprofile.jpg" 
-              />
+              <img alt="Profile" src="userprofile.jpg" />
             </div>
           </div>
           <ul
@@ -96,24 +99,28 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-            <a
-              onClick={() => navigate("/profile")}
-              className="justify-between flex items-center"
-            >
-              Profile
-              <span className="badge">Me</span>
-            </a>
-          </li>
+              <a
+                onClick={() => navigate("/profile")}
+                className="justify-between flex items-center"
+              >
+                Profile
+                <span className="badge">Me</span>
+              </a>
+            </li>
 
             <li>
-            <a onClick={() => {
-              if (authenticatedUser) {
-                logout();
-                toast.success("Logged out!");
-              } else {
-                navigate("/login")
-              }}
-              }>{authenticatedUser ? "Logout" : "Login"}</a> 
+              <a
+                onClick={() => {
+                  if (authenticatedUser) {
+                    logout();
+                    toast.success("Logged out!");
+                  } else {
+                    navigate("/login");
+                  }
+                }}
+              >
+                {authenticatedUser ? "Logout" : "Login"}
+              </a>
             </li>
           </ul>
         </div>
