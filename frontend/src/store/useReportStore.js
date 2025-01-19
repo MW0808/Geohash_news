@@ -8,6 +8,8 @@ export const useReportStore = create((set, get) => ({
     reports: [],
     loadingReports: false,
     submittingReport: false,
+    loadedNewsletter: null,
+    loadingNewsLetter: false,
 
     getGeoHash: (lat, long) => {
         const geohash = Geohash.encode(lat, long, 6);
@@ -58,13 +60,24 @@ export const useReportStore = create((set, get) => ({
     },
 
     submitReport: async (data) => {
-        console.log(data)
         const posterId = useAuthStore.getState().authenticatedUser._id;
         const {geohash} = get();
         try {
             await axiosInstance.post("/reports/post", {...data, location: geohash, posterId});
         } catch (error) {
             console.log(error)
+        }
+    },
+
+    getNewsletter: async (data) => {
+        set({loadingNewsLetter: true})
+        try {
+            const newsletter = await axiosInstance.post("/news/getNewsletter", data);
+            set({loadedNewsletter: newsletter});
+        } catch (error) {
+            console.log(error)
+        } finally {
+            set({loadingNewsLetter: false})
         }
     }
 

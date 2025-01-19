@@ -98,3 +98,32 @@ export const generateNewsletter = async () => {
         console.log(error);
     }
 }
+
+export const getNewsletter = async (req, res) => {
+
+    const { geohash: location, date } = req.body;
+
+    const targetDate = new Date(date);
+    const startOfTargetDay = new Date(targetDate.setHours(0, 0, 0, 0));
+    const endOfTargetDay = new Date(targetDate.setHours(23, 59, 59, 999));
+
+    try {
+        const todaysNewsletter = await Newsletter.findOne({
+            geohash: location,
+            createdAt: {
+                $gte: startOfTargetDay,
+                $lte: endOfTargetDay 
+            }
+        });
+
+        if (!todaysNewsletter) {
+            return res.status(404).json({ message: "No newsletter found for this geohash and date." });
+        }
+        console.log("HI")
+        return res.status(200).json(todaysNewsletter);
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "An error occurred while retrieving the newsletter." });
+    }
+};

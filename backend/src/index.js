@@ -8,6 +8,7 @@ import { connectDB } from "./lib/db.js"
 import reportRoutes from "./routes/report.route.js"
 import authRoutes from "./routes/auth.route.js"
 import cron from "node-cron"
+import newsletterRoutes from "./routes/newsletter.route.js"
 
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(cors({
 
 app.use("/api/auth", authRoutes);
 app.use("/api/reports", reportRoutes);
+app.use("/api/news", newsletterRoutes)
 
 cron.schedule('* * * * *', async() => { // 0 19 * * * for 7pm
     generateNewsletter();
