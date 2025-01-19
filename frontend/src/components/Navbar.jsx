@@ -108,7 +108,7 @@ const Navbar = () => {
 
             
             <li>
-              <a>Logout</a>
+            <a onClick={() => navigate("/login")}>Log in</a> {/* Navigate to login */}
             </li>
           </ul>
         </div>

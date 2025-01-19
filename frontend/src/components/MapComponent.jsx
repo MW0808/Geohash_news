@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 
 const containerStyle = {
@@ -12,38 +12,41 @@ const initialCenter = {
 };
 
 const MapComponent = () => {
-  const [selected, setSelected] = useState(null); // State to track selected marker
-  const [currentPosition, setCurrentPosition] = useState(initialCenter);
+  const [selected, setSelected] = useState(null); // Track selected coordinates
 
-  const handleMapClick = useCallback((e) => {
-    const lat = e.latLng.lat();
-    const lng = e.latLng.lng();
-    setCurrentPosition({ lat, lng }); // Update position
-    setSelected({ lat, lng }); // Set selected marker
-  }, []);
+  // Handle map clicks
+  const handleMapClick = (event) => {
+    const lat = event.latLng.lat();
+    const lng = event.latLng.lng();
+    const coordinates = { lat, lng }; // Prepare coordinates object
+    console.log(`Selected Coordinates:`, coordinates); // Log coordinates for debugging
+    setSelected(coordinates); // Update state with selected coordinates
+  };
 
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
-      center={currentPosition}
+      center={initialCenter}
       zoom={10}
-      onClick={handleMapClick} // Add click handler
+      onClick={handleMapClick} // Trigger on map click
     >
-      {/* Marker for Current Position */}
-      <Marker position={currentPosition} onClick={() => setSelected(currentPosition)} />
-
-      {/* InfoWindow to Display Coordinates */}
+      {/* Marker for the selected position */}
       {selected && (
-        <InfoWindow
-          position={selected}
-          onCloseClick={() => setSelected(null)} // Close InfoWindow
-        >
-          <div>
-            <h4>Coordinates</h4>
-            <p>Lat: {selected.lat.toFixed(6)}</p>
-            <p>Lng: {selected.lng.toFixed(6)}</p>
-          </div>
-        </InfoWindow>
+        <>
+          <Marker position={selected} />
+
+          {/* InfoWindow to Display Coordinates */}
+          <InfoWindow
+            position={selected}
+            onCloseClick={() => setSelected(null)} // Allow closing InfoWindow
+          >
+            <div>
+              <h4>Coordinates</h4>
+              <p>Lat: {selected.lat.toFixed(6)}</p>
+              <p>Lng: {selected.lng.toFixed(6)}</p>
+            </div>
+          </InfoWindow>
+        </>
       )}
     </GoogleMap>
   );
