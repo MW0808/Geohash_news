@@ -37,7 +37,7 @@
 
 ## Usage Guide
 
-1. **Launch the Program**:
+1. **Launch the Program**
 
 2. **Enter Details**:
     - Sign up and authorize for an account
