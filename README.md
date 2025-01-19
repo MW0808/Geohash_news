@@ -3,8 +3,8 @@
 ---
 
 ## Table of Contents
-- [Purpose](#purpose)
-- [Features of the software](#Features-of-the-software)
+- [Purpose](#project-overview)
+- [Features of the software](#features-of-the-software)
 - [Installation Instructions](#installation-instructions)
 - [Usage Guide](#usage-guide)
 - [Contributors](#contributors)
