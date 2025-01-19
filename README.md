@@ -34,7 +34,9 @@
 2. Run npm install on both frontend and backend
 3. Sign in and create your [API Key](https://aistudio.google.com/welcome)
 4. Create a .env file and store it in the backend folder
-5. Run the program on localhost5173
+5. Fill in the required information using the following naming conventions: <img src="![IMG_1037]" alt=".env file template" width="200">
+
+6. Run the program on localhost5173
 
 ---
 
