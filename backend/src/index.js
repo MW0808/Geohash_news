@@ -3,8 +3,9 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { generateNewsletter } from "./controllers/newsletter.controller.js";
 import { app, server } from "./lib/socket.js";
-import { connectDB } from "./lib/db.js"
-import reportRoutes from "./routes/report.route.js"
+import { connectDB } from "./lib/db.js";
+import reportRoutes from "./routes/report.route.js";
+import cron from 'node-cron';
 
 
 dotenv.config();

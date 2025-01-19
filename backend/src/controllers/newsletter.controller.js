@@ -1,6 +1,5 @@
 import Newsletter from "../models/newsletter.model.js";
 import cloudinary from "../lib/cloudinary.js";
-import mongoose from "mongoose";
 import Report from "../models/report.model.js";
 import Geohash from "latlon-geohash";
 import User from "../models/user.model.js";
@@ -21,13 +20,18 @@ export const subscribeToNewsletter = async (req, res) => {
     }
 }
 
-export const sendNewsletter = async (newsletter) => {
+export const sendNewsletter = async (newsletterContent, locationHash) => {
     try {
         //Below is the testing data
-        const title = "Daily Newsletter";
-        const content = "Here’s the content of the newsletter.";
+        const today = new Date();
+        const month = today.getMonth() + 1;
+        const day = today.getDate();
+
+        const title = `Daily Digests - ${month}.${day}`
+        const content = newsletterContent;
         const images = [];  // Replace with actual image paths
         const score = 90;
+        const location = locationHash;
 
         let imageUrls = [];
             if (images) {
@@ -46,6 +50,7 @@ export const sendNewsletter = async (newsletter) => {
                 title,
                 content, 
                 images: imageUrls,
+                location,
                 score
             });
         
@@ -86,6 +91,7 @@ export const generateNewsletter = async () => {
                 // send nearby reports to Richard
             });
             console.log(nearbyReports)
+            sendNewsletter("Hi", results[i]);
         }
         //loop through the refinedLocations and generate newsletters for them and their neighborhood (refer to getReports in reports 
         // controller for this implementation)
