@@ -1,6 +1,4 @@
-# Geohash_news
-
----
+# What's New
 
 ## Table of Contents
 - [Purpose](#purpose)
