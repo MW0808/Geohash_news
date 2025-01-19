@@ -2,13 +2,9 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { text } from "express"; 
 import dotenv from "dotenv"
 
-<<<<<<< HEAD
-const genAI = new GoogleGenerativeAI("API_KEY_GOES_HERE");
-=======
 dotenv.config();
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
->>>>>>> 75d92436ac2b45dc66836dfd135e73096f93b305
 
 async function genNewsLetter(reports) {
 
