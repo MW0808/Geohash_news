@@ -1,7 +1,5 @@
 # What's New
 
-
-
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Features of the software](#features-of-the-software)
@@ -17,12 +15,17 @@
 ---
 
 ## Features of the software
+
 **1. User-Generated News Report**
 - Anonymously read & share community news in real time: Users will only be able to see/post news in the area they are currently located in.
+
+
 **2. User engagement & Interaction**
 - Receive/give upvote & downvote for posts
 - Maintain streaks by posting everyday
 - Be able to see a global history of total likes across all posts on user profile
+
+  
 **3. News Digest Generation**
 - Subscribe to receive daily news digests from areas of your choice
 - Digest includes the most popular or important news from the community summarized through our trained AI model
@@ -52,9 +55,9 @@
     - Sign up and authorize for an account
 
 3. **Begin Using the Program!**
-    - Posting *Posting are only allowed after 7 days of registration
-    - Upvoting/downvoting
-    - Subscribe to daily digests in any area
+    - Posting are only allowed after 7 days of registration
+    - Upvoting/downvoting 
+    - Subscribe to daily newsletters in any area
 
 ---
 
