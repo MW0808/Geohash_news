@@ -51,7 +51,9 @@ export const useReportStore = create((set, get) => ({
         if (!reports) return;
         const socket = useAuthStore.getState().socket;
         socket.on("newReport", (newReport) => {
-            set({reports: [...get().reports, newReport]});
+            if (!get().reports.includes(newReport)) {
+                set({reports: [...get().reports, newReport]});
+            }
         })
     },
 
