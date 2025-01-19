@@ -17,7 +17,7 @@
 ---
 
 ## Features of the software
-- Ananonymously read & share community news in real time: Users will only be able to see/post news in the area they are currently located in. 
+- Anonymously read & share community news in real time: Users will only be able to see/post news in the area they are currently located in. 
 - Receive/give upvote & downvote for posts
 - Subscribe to receive daily news digests from areas of your choice
 
