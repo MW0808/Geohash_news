@@ -1,10 +1,8 @@
-# Geohash_news
-
----
+# What's New
 
 ## Table of Contents
-- [Purpose](#purpose)
-- [Features of the software](#Features-of-the-software)
+- [Project Overview](#project-overview)
+- [Features of the software](#features-of-the-software)
 - [Installation Instructions](#installation-instructions)
 - [Usage Guide](#usage-guide)
 - [Contributors](#contributors)
@@ -17,60 +15,49 @@
 ---
 
 ## Features of the software
-- Anonymously read & share community news in real time: Users will only be able to see/post news in the area they are currently located in. 
+
+**1. User-Generated News Report**
+- Anonymously read & share community news in real time: Users will only be able to see/post news in the area they are currently located in.
+
+
+**2. User engagement & Interaction**
 - Receive/give upvote & downvote for posts
+- Maintain streaks by posting everyday
+- Be able to see a global history of total likes across all posts on user profile
+
+  
+**3. News Digest Generation**
 - Subscribe to receive daily news digests from areas of your choice
+- Digest includes the most popular or important news from the community summarized through our trained AI model
+
+---
 
 ## Installation Instructions
+1. Open the program in an IDE of your choice
+2. Run npm install on both frontend and backend
+3. Create a .env file and store it in the backend folder
+4. Fill in the required information using the following naming conventions:
+   
+    <img src="images_for_readme/img1.jpg" alt=".env file template" width="300">
 
-- You will need to install [java](https://www.jetbrains.com/idea/download/?section=mac) to run this program. 
-- The program is compatible with OpenJDK 23
-
-
-To utilize SMS notifications, follow these steps:
-
-1. **Sign up for Twilio**:
-    - Visit the [Twilio signup page](https://login.twilio.com/u/signup?state=hKFo2SBqVGtXWkJ3WktFLWlTT3RjRTdDc2ozWDByXy1ES3B2cKFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIDNTcWdTSjlHWUlDb0VPWnN6SmY3NVpzQndMNV9NaGI2o2NpZNkgTW05M1lTTDVSclpmNzdobUlKZFI3QktZYjZPOXV1cks).
-    - Be sure to enter the phone number you would like your notifications to be sent to.
-    - Complete the verification process to access your `Account SID`, `Auth Token`, and `Twilio Phone Number`.
-
-   Example Screenshot:
-    <img src="images_used_for_readme/img_2.png" alt="twilio example" width="500"/>
-
-2. **Set up Twilio credentials**:
-    - Navigate to the following file path:
-      ```plaintext
-      src -> main -> java -> us.jonathans -> app -> AppBuilder
-      ```
-    - Enter your Twilio credentials in the appropriate fields.
-
-   Example screenshot:
-
-   <img src="images_used_for_readme/img_1.png" alt="enter information" width="600"/>
+    - Sign in and create your [API Key](https://aistudio.google.com/welcome)
+    - Create the database [MongoDB](https://www.mongodb.com/cloud)
+    - Get Cloud name, API key, API secret [Cloudinary](https://cloudinary.com)
+5. Run the program on localhost5173
 
 ---
 
 ## Usage Guide
 
-1. **Launch the Program**:
-    - After installation, run the program to open the Mancala game interface.
+1. **Launch the Program**
 
 2. **Enter Details**:
-    - Provide your username.
-    - Optionally, enable **SMS notifications** and enter your phone number.
+    - Sign up and authorize for an account
 
-3. **Select AI Difficulty**:
-    - Choose the engine difficulty level (`minimax_easy`, `minimax_medium`, or `minimax_hard`).
-
-4. **Start Playing**:
-    - Press the **Start** button to initialize the game. Stones will appear on the Mancala board.
-
-5. **Cancel or Stop**:
-    - Use the **Cancel** button if you need to stop or reset.
-
-6. **Leaderboard and Notifications**:
-    - After each game, your score is submitted to the leaderboard.
-    - If SMS notifications are enabled, you will receive updates about your rank.
+3. **Begin Using the Program!**
+    - Posting are only allowed after 7 days of registration
+    - Upvoting/downvoting 
+    - Subscribe to daily newsletters in any area
 
 ---
 
