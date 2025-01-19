@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
 
 const LoginPage = () => {
-  const navigate = useNavigate(); // For navigation
+  const navigate = useNavigate(); 
 
   const [formData, setFormData] = useState({
     email: "",
@@ -20,12 +20,10 @@ const LoginPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-base-200">
-      {/* Welcome Back Text */}
       <h1 className="text-3xl font-bold mb-6">Welcome Back!</h1>
 
       <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
         <form onSubmit={handleSubmit}>
-        {/* Email Input */}
         <label className="input input-bordered flex items-center gap-2 mb-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +37,6 @@ const LoginPage = () => {
           <input type="text" className="grow" placeholder="Email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
         </label>
 
-        {/* Password Input */}
         <label className="input input-bordered flex items-center gap-2 mb-6">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -56,15 +53,13 @@ const LoginPage = () => {
           <input type="password" className="grow" placeholder="Password" value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} />
         </label>
 
-        {/* Enter Button */}
         <button className="btn btn-primary w-full mb-4" disabled={loggingIn} type='submit'>Enter</button>
         
-        {/* Don't Have an Account? */}
         <div className="text-center text-sm">
           Don’t have an account?{" "}
           <button
             className="btn btn-link text-primary"
-            onClick={() => navigate('/signup')} // Navigate to signup page
+            onClick={() => navigate('/signup')} 
           >
             Sign up
           </button>
